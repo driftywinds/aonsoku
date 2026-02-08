@@ -139,7 +139,7 @@ export async function getArtistAllSongs(artistId: string, params: ArtistSongsPar
   if (!artist || !artist.album) return emptyResponse
 
   const results = await Promise.all(
-    artist.album.map((a) => subsonic.albums.getOne(a.id)),
+    artist.album.map(({ id }) => subsonic.albums.getOne(id)),
   )
 
   const songs = results.flatMap((result) => {
@@ -155,4 +155,12 @@ export async function getArtistAllSongs(artistId: string, params: ArtistSongsPar
     songs: sortedSongs,
     nextOffset: null,
   }
+}
+
+export async function getFavoriteSongs() {
+  const response = await subsonic.songs.getFavoriteSongs()
+
+  if (!response || !response.song) return { songs: [] }
+
+  return { songs: response.song }
 }
