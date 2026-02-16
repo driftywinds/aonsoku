@@ -1,5 +1,5 @@
 import { electronApp, optimizer, platform } from '@electron-toolkit/utils'
-import { app, globalShortcut } from 'electron'
+import { app } from 'electron'
 import { createAppMenu } from './core/menu'
 import { initAutoUpdater } from './core/updater'
 import { createWindow, mainWindow } from './window'
@@ -55,7 +55,12 @@ if (!instanceLock) {
 
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
-    globalShortcut.register('F11', () => {})
+
+    window.webContents.on('before-input-event', (event, input) => {
+      if (input.key === 'F11') {
+        event.preventDefault()
+      }
+    })
   })
 
   app.on('before-quit', () => {
