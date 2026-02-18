@@ -52,29 +52,31 @@ export default function Home() {
   ]
 
   return (
-    <div className="w-full px-8 py-6">
+    <div className="w-full">
       {isFetching || isLoading ? (
         <HeaderFallback />
       ) : (
         <HomeHeader songs={randomSongs || []} />
       )}
 
-      {sections.map((section) => {
-        if (section.loader) {
-          return <PreviewListFallback key={section.title} />
-        }
+      <div className="px-8 pb-6">
+        {sections.map((section) => {
+          if (section.loader) {
+            return <PreviewListFallback key={section.title} />
+          }
 
-        if (!section.data || !section.data?.list) return null
+          if (!section.data || !section.data?.list) return null
 
-        return (
-          <PreviewList
-            key={section.title}
-            title={section.title}
-            moreRoute={section.route}
-            list={section.data.list}
-          />
-        )
-      })}
+          return (
+            <PreviewList
+              key={section.title}
+              title={section.title}
+              moreRoute={section.route}
+              list={section.data.list}
+            />
+          )
+        })}
+      </div>
     </div>
   )
 }
