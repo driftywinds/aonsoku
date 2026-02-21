@@ -582,7 +582,8 @@
     "dialog": {
       "title": "Nowa Wersja jest Dostępna!",
       "remindLater": "Przypomnij Mi Później",
-      "install": "Zainstaluj i Uruchom Ponownie"
+      "install": "Zainstaluj i Uruchom Ponownie",
+      "macOS": "Pobierz na GitHubie"
     },
     "toasts": {
       "started": "Proces aktualizacji został rozpoczęty.",

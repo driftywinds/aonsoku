@@ -18,7 +18,7 @@ export default function HomeHeader({ songs }: HomeHeaderProps) {
 
   return (
     <Carousel
-      className="w-full border rounded-lg overflow-hidden z-10"
+      className="w-full overflow-hidden z-10"
       opts={{
         loop: true,
       }}
@@ -29,21 +29,18 @@ export default function HomeHeader({ songs }: HomeHeaderProps) {
       ]}
       data-testid="header-carousel"
     >
-      <CarouselContent
-        className="ml-0 flex transform-gpu"
-        style={{ borderRadius: 'calc(var(--radius) - 2px)' }}
-      >
+      <CarouselContent className="ml-0 flex">
         {songs.map((song, index) => (
           <CarouselItem
             key={song.id}
-            className="pl-0 basis-full maskImage-carousel-item"
+            className="pl-0 basis-full maskImage-carousel-item transform-gpu"
             data-testid={`carousel-header-song-${index}`}
           >
             <HeaderItem song={song} />
           </CarouselItem>
         ))}
       </CarouselContent>
-      <div className="absolute right-[4.5rem] bottom-10">
+      <div className="absolute right-[5rem] bottom-10">
         <CarouselPrevious
           data-testid="header-carousel-previous"
           className="-left-6 shadow-sm"

@@ -3,6 +3,7 @@ import { Play } from 'lucide-react'
 import { isFirefox } from 'react-device-detect'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { Link } from 'react-router-dom'
+import { BlurredCanvas } from '@/app/components/blurred-canvas'
 import { ImageLoader } from '@/app/components/image-loader'
 import { Badge } from '@/app/components/ui/badge'
 import { Button } from '@/app/components/ui/button'
@@ -35,21 +36,11 @@ export function HeaderItem({ song }: { song: ISong }) {
       <ImageLoader id={song.coverArt} type="song" size={400}>
         {(src) => (
           <>
-            <div
-              data-testid="header-bg"
-              className="absolute -inset-10 bg-cover bg-center z-0 bg-skeleton"
-              style={{
-                backgroundImage: `url(${src})`,
-                filter: isFirefox ? 'blur(24px)' : undefined,
-              }}
-            />
-            <div
-              className={clsx(
-                'w-full h-full bg-gradient-to-b from-background/40 to-background/80 absolute z-10',
-                !isFirefox && 'backdrop-blur-xl',
-              )}
-            >
-              <div className="flex h-full p-4 2xl:p-6 gap-4">
+            <div data-testid="header-bg" className="absolute inset-0 z-0">
+              <BlurredCanvas src={src} blur={16} className="scale-110" />
+            </div>
+            <div className="w-full h-full absolute z-10 bg-gradient-to-b from-transparent to-background-foreground">
+              <div className="flex h-full px-8 py-6 gap-4">
                 <div
                   className="h-full aspect-square relative group bg-skeleton rounded-lg"
                   data-testid="header-image-container"
